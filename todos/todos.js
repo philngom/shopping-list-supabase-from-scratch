@@ -6,6 +6,9 @@ import {
     buyItem,
     createItem
 } from '../fetch-utils.js';
+import { renderItem } from '../render-utils.js';
+
+const todoItemsEl = document.querySelector('todo-list-container');
 
 checkAuth();
 
@@ -23,5 +26,12 @@ logoutButton.addEventListener('click', () => {
 
 async function displayShoppingListItems() {
     let list = await getItems();
+
+    todoItemsEl.textContent = '';
+
+    for (let item of list) {
+        const itemEl = renderItem(item);
+        todoItemsEl.append(itemEl);
+    }
 
 }
