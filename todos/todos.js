@@ -8,21 +8,29 @@ import {
 } from '../fetch-utils.js';
 import { renderItem } from '../render-utils.js';
 
-const todoItemsEl = document.querySelector('todo-list-container');
+const todoItemsEl = document.querySelector('.todo-list-container');
+const logoutButton = document.getElementById('logout');
+const itemInputFormEl = document.querySelector('.todo-input-form');
 
 checkAuth();
 
-const logoutButton = document.getElementById('logout');
+window.addEventListener('load', async() => {
+
+    displayShoppingListItems();
+});
+
+itemInputFormEl.addEventListener('submit', async(e) => {
+    e.preventDefault();
+    const data = new FormData(itemInputFormEl);
+    const item = data.get('todo-item');
+    itemInputFormEl.reset();
+    await createItem(item);
+    displayShoppingListItems();
+});
 
 logoutButton.addEventListener('click', () => {
     logout();
 });
-
-
-// window.addEventListener('load', async() => {
-
-//     displayShoppingListItems();
-// });
 
 async function displayShoppingListItems() {
     let list = await getItems();
@@ -35,3 +43,4 @@ async function displayShoppingListItems() {
     }
 
 }
+
