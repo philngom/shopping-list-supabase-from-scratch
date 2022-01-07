@@ -11,6 +11,7 @@ import { renderItem } from '../render-utils.js';
 const todoItemsEl = document.querySelector('.todo-list-container');
 const logoutButton = document.getElementById('logout');
 const itemInputFormEl = document.querySelector('.todo-input-form');
+const deleteButtonEl = document.querySelector('.delete-all-todos-button');
 
 checkAuth();
 
@@ -25,6 +26,11 @@ itemInputFormEl.addEventListener('submit', async(e) => {
     const item = data.get('todo-item');
     itemInputFormEl.reset();
     await createItem(item);
+    displayShoppingListItems();
+});
+
+deleteButtonEl.addEventListener('click', async() => {
+    await deleteAllItems();
     displayShoppingListItems();
 });
 
