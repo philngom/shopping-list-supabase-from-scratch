@@ -45,6 +45,15 @@ async function displayShoppingListItems() {
 
     for (let item of list) {
         const itemEl = renderItem(item);
+        itemEl.addEventListener('click', async() => {
+            if (item.complete) {
+                await buyItem(item.id, false);
+                displayShoppingListItems();
+            } else {
+                await buyItem(item.id, true);
+                displayShoppingListItems();
+            }
+        });
         todoItemsEl.append(itemEl);
     }
 
