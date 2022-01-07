@@ -54,11 +54,11 @@ export async function deleteAllItems() {
     return checkError(response);
 }
 
-export async function buyItem(id) {
+export async function buyItem(id, bool) {
     const response = await client
         .from('todos')
         .update({
-            complete: true
+            complete: bool
         })
         .match({ id: id });
 
