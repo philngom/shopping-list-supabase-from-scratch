@@ -8,10 +8,10 @@ import {
 } from '../fetch-utils.js';
 import { renderItem } from '../render-utils.js';
 
-const todoItemsEl = document.querySelector('.todo-list-container');
+const shoppingItemsEl = document.querySelector('.shopping-list-container');
 const logoutButton = document.getElementById('logout');
-const itemInputFormEl = document.querySelector('.todo-input-form');
-const deleteButtonEl = document.querySelector('.delete-all-todos-button');
+const itemInputFormEl = document.querySelector('.shopping-input-form');
+const deleteButtonEl = document.querySelector('.delete-all-items-button');
 
 checkAuth();
 
@@ -23,7 +23,7 @@ window.addEventListener('load', async() => {
 itemInputFormEl.addEventListener('submit', async(e) => {
     e.preventDefault();
     const data = new FormData(itemInputFormEl);
-    const item = data.get('todo-item');
+    const item = data.get('shopping-item');
     itemInputFormEl.reset();
     await createItem(item);
     displayShoppingListItems();
@@ -41,7 +41,7 @@ logoutButton.addEventListener('click', () => {
 async function displayShoppingListItems() {
     let list = await getItems();
 
-    todoItemsEl.textContent = '';
+    shoppingItemsEl.textContent = '';
 
     for (let item of list) {
         const itemEl = renderItem(item);
@@ -54,7 +54,7 @@ async function displayShoppingListItems() {
                 displayShoppingListItems();
             }
         });
-        todoItemsEl.append(itemEl);
+        shoppingItemsEl.append(itemEl);
     }
 
 }
