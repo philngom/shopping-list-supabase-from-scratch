@@ -6,7 +6,7 @@ export function renderItem(item) {
     if (item.complete) {
         p.classList.add('bought');
     }
-    div.classList.add('todo-item');
+    div.classList.add('list-item');
     div.append(p);
 
     return div;
